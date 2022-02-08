@@ -97,15 +97,19 @@ function studIdNumberIdentify(nationality, idNumber) {
       studIdNumber = (idHeader.indexOf(studIdNumber.substring(0,1))+10) + 
        + '' + studIdNumber.substr(1,8);
 
-      let multiplyNum = [1,9,8,7,6,5,4,3,2,1];
+      var multiplyNum = [1,9,8,7,6,5,4,3,2,1,1];
       var checkNum = 0;
       for(var i = 0; i <= 9; i++) {
         var baseNum = studIdNumber.substr(i,1) * multiplyNum[i];
-        if(baseNum >= 10) {
-          baseNum = '' + baseNum;
-          baseNum = parseInt(baseNum.substr(baseNum.length - 1));
-        }
         checkNum += baseNum;
+      }
+	    
+      checkNum = checkNum.toString();
+				
+      checkNum = parseInt(checkNum.substr(checkNum.length - 1, 1));
+				
+      if(checkNum == 0) {
+          checkNum = 10;
       }
 
       if((10 - checkNum) !== checkNum1) {
